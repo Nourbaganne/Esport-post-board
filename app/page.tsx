@@ -15,7 +15,7 @@ export default function Home() {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([])
   const [filters, setFilters] = useState<Filters>({})
   const [loading, setLoading] = useState(true)
-  const [currentUserId, setCurrentUserId] = useState<string | null>(null)
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>(undefined)
   const supabase = createClientSupabase()
 
   const fetchPosts = async () => {
@@ -42,7 +42,7 @@ export default function Home() {
 
   const getCurrentUser = async () => {
     const { data: { user } } = await supabase.auth.getUser()
-    setCurrentUserId(user?.id || null)
+    setCurrentUserId(user?.id || undefined)
   }
 
   useEffect(() => {
